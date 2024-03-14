@@ -5,7 +5,7 @@ import { ordenarFecha } from "./utils.js";
 
 
 import managerActividad from "./managerActividad.js";
-
+console.log(__dirname);
 const app = express()
 
 let puerto = 8080
@@ -15,6 +15,7 @@ const ManagerActividad = new managerActividad("./actividades.json")
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static(__dirname + "/src/publics"))
 
 app.engine("handlebars", handlebars.engine())
 app.set("views", __dirname + "/src/views")
