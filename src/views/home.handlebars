@@ -1,0 +1,24 @@
+ <div class="text-center">
+
+    <h1>Productos</h1>
+  </div>
+{{#if producto.length}}
+{{#each producto}}
+<div class="card " style="width:17rem">
+  {{!-- <img src="{{thumbnails}}" class="card-img-top" height="50%" /> --}}
+  <div class="card-body row justify-content-center">
+    <h5 class= "card-title text-center">{{tarea}} </h5>
+    <p class="card-text text-center">{{Urgente}}</p>
+    </div>
+  {{!-- <a href="/api/products/{{_id}}" class="btn btn-primary text-center my-2">Ver Detalle</a> --}}
+  <a href="#" class="btn btn-primary text-center my-2">Ver Detalle</a>
+</div>
+
+{{/each}}
+
+{{else}}
+
+<h2>por el momento no hay </h2>
+
+{{/if}}
+

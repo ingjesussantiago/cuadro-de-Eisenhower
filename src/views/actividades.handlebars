@@ -1,0 +1,205 @@
+<div class="container">
+    <div class="row card-container">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="card">
+                <h1 class="text-center"><i class="fa fa-tasks icon"></i> Formulario de Tareas</h1>
+                <form action="/producto" method="post">
+                    <div class="form-group">
+                        <label for="tarea">Tarea:</label>
+                        <input type="text" class="form-control" id="tarea" name="tarea">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="urgencia">Urgencia:</label>
+                        <select class="form-control" id="urgencia" name="urgencia">
+                            <option value="Ni Urgente ni Importante">Ni Urgente ni Importante</option>
+                            <option value="Importante pero no Urgente">Importante pero no Urgente</option>
+                            <option value="Urgente e Importante">Urgente e Importante</option>
+                            <option value="Urgente pero no Importante">Urgente pero no Importante</option>
+                        </select>
+                    </div>
+
+                    <div id="fecha-group" class="form-group" style="display: none;">
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" class="form-control" id="fecha" name="fecha">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-send icon"></i>
+                        Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("urgencia").addEventListener("change", function () {
+        var urgencia = this.value;
+        var fechaGroup = document.getElementById("fecha-group");
+
+        if (urgencia === "Urgente e Importante" || urgencia === "Urgente pero no Importante") {
+            fechaGroup.style.display = "block";
+        } else {
+            fechaGroup.style.display = "none";
+        }
+    });
+</script>
+
+
+
+<div class="container">
+    <h1 class="text-center my-4">Cuadro de Eisenhower</h1>
+    <div class="row ">
+        <div class="col-sm-6 col-md-6 mb-5 ">
+            <div class="card h-100  bg-danger">
+                <div class="card-body">
+                    <h1 class="card-title text-center"><i class="fas fa-exclamation-circle"></i> Urgente e Importante
+                    </h1>
+                    <h1 class="text-center">¡Hazlo ya!</h1>
+
+                    {{#if urgentesEimportantes.length}}
+                    {{#each urgentesEimportantes}}
+
+                    <div class="card-body row justify-content-left">
+                        <div class="col-4">
+                            <h5 class="card-text text-center  my-2">{{fecha }}</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="card-title text-left  my-2">{{tarea}}</h5>
+                        </div>
+                        <div class="col-2"><a href="/producto/{{id}}" class="btn btn-dark text-center ">Eliminar</a></div>
+
+
+
+                    </div>
+
+                    {{!-- <a href="/api/products/{{_id}}" class="btn btn-primary text-center my-2">Ver Detalle</a> --}}
+
+
+
+                    {{/each}}
+
+                    {{else}}
+
+                    <h2>Sin Tarea</h2>
+
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 mb-5">
+            <div class="card h-100 bg-warning">
+                <div class="card-body">
+                    <h1 class="card-title text-center"><i class="fas fa-exclamation-circle"></i> Urgente pero no
+                        Importante</h1>
+                         <h1 class="text-center">Agendado y planificado</h1>
+                    {{#if UrgentePeroNoImportante.length}}
+                    {{#each UrgentePeroNoImportante}}
+
+                    {{!-- <img src="{{thumbnails}}" class="card-img-top" height="50%" /> --}}
+                    <div class="card-body row justify-content-left">
+                        <div class="col-4">
+                            <h5 class="card-text text-center  my-2">{{fecha }}</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="card-title text-left  my-2">{{tarea}}</h5>
+                        </div>
+                        <div class="col-2"><a href="/producto/{{id}}" class="btn btn-dark text-center ">Eliminar</a></div>
+
+
+
+                    </div>
+                    {{!-- <a href="/api/products/{{_id}}" class="btn btn-primary text-center my-2">Ver Detalle</a>
+                    --}}
+                    {{!-- <a href="#" class="btn btn-primary text-center my-2">Ver Detalle</a> --}}
+
+                    {{/each}}
+
+                    {{else}}
+
+                    <h2>Sin Tarea</h2>
+
+                    {{/if}}
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 mb-5">
+            <div class="card h-100 bg-info">
+                <div class="card-body">
+                    <h1 class="card-title text-center"><i class="fas fa-exclamation-triangle"></i> Importante pero no
+                        Urgente</h1>
+                         <h1 class="text-center">Delega</h1>
+                    {{#if ImportantePeroNoUrgente.length}}
+                    {{#each ImportantePeroNoUrgente}}
+
+                    {{!-- <img src="{{thumbnails}}" class="card-img-top" height="50%" /> --}}
+
+                    <div class="card-body row justify-content-left">
+                        <div class="col-4">
+                            <h5 class="card-text text-center  my-2">{{fecha }}</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="card-title text-left  my-2">{{tarea}}</h5>
+                        </div>
+                        <div class="col-2"><a href="/producto/{{id}}"class="btn btn-dark text-center ">Eliminar</a></div>
+
+
+
+                    </div>
+                    {{!-- <a href="/api/products/{{_id}}" class="btn btn-primary text-center my-2">Ver Detalle</a>
+                    --}}
+                    {{!-- <a href="#" class="btn btn-primary text-center my-2">Ver Detalle</a> --}}
+
+                    {{/each}}
+
+                    {{else}}
+
+                    <h2>Sin Tarea</h2>
+
+                    {{/if}}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6 mb-5">
+            <div class="card h-100 bg-secondary">
+                <div class="card-body">
+                    <h1 class="card-title text-center"><i class="far fa-circle"></i> Ni Urgente ni Importante</h1>
+                     <h1 class="text-center">¡Ignora / Elimina!</h1>
+                    {{#if NiUrgenteNiImportante.length}}
+                    {{#each NiUrgenteNiImportante}}
+
+                    {{!-- <img src="{{thumbnails}}" class="card-img-top" height="50%" /> --}}
+                    <div class="card-body row justify-content-left">
+                        <div class="col-4">
+                            <h5 class="card-text text-center  my-2">{{fecha }}</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="card-title text-left  my-2">{{tarea}}</h5>
+                        </div>
+                        <div class="col-2"><a href="/producto/{{id}}" class="btn btn-dark text-center "  method="DELETE">Eliminar</a></div>
+
+
+
+                    </div>
+                    {{!-- <a href="/api/products/{{_id}}" class="btn btn-primary text-center my-2">Ver Detalle</a>
+                    --}}
+                    {{!-- <a href="#" class="btn btn-primary text-center my-2">Ver Detalle</a> --}}
+
+
+                    {{/each}}
+
+                    {{else}}
+
+                    <h2>Sin Tarea</h2>
+
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
